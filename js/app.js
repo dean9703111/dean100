@@ -53,7 +53,7 @@ function startDetect() {
 			text = testCase
 			console.log(text)
 			//可以用的開頭結尾
-			let startArray = ['可以', '很好', '好', '以']
+			let startArray = ['可以', '很好', '好', '以','號','curry']
 			let endArray = ['沒問題', '很可以', 'OK', '跟我想的一樣', '沒問', '跟我']
 			let startIndex = -1, endIndex = -1;
 			for (var i = 0; i < 4; i++) {
