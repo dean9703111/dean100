@@ -11,7 +11,7 @@ $(document).ready(function () {
 		recognition = new webkitSpeechRecognition();
 	}
 	// startDetect()
-	let sensor = new Magnetometer();
+	let sensor = new Magnetometer({frequency: 10});
 	let sensorValue = 0;
 	sensor.start();
 	sensor.onreading = () => {
@@ -42,6 +42,9 @@ function startDetect() {
 
 	recognition.onstart = function () {
 		console.log('開始辨識...');
+		if ($('.vibrate').is(':checked')) {
+			window.navigator.vibrate(150); 
+		}
 	};
 
 
