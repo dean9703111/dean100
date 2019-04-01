@@ -61,10 +61,6 @@ function startDetect () {
 		var testCase = event.results[i][j].transcript;
 		show.innerHTML = testCase
 		if (testCase !== undefined) {
-			
-			var i = event.resultIndex;
-			var j = event.results[i].length - 1;
-			show.innerHTML = event.results[i][j].transcript;
 			text = testCase
 			console.log(text)
 			let startIndex = text.indexOf("可以"),
