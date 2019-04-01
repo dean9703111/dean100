@@ -57,7 +57,8 @@ function startDetect () {
 
 	recognition.onresult = function (res) {
 		if (text.results[0][0].transcript !== undefined) {
-			text = text.results[0][0].transcript
+			text = text.results[0][0].transcript.toString()
+			console.log(text)
 			let startIndex = text.indexOf("可以"),
 				endIndex = text.indexOf("沒問題");
 			if (startIndex !== -1 && endIndex !== -1) {
