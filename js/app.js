@@ -43,7 +43,7 @@ $(document).ready(function () {
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
 });
 function startDetect () {
-	created ()
+	created()
 	recognition.continuous = true;
 	recognition.interimResults = true;
 	recognition.lang = "cmn-Hant-TW";
@@ -55,16 +55,18 @@ function startDetect () {
 		console.log('停止辨識!');
 	};
 
-	recognition.onresult = function (text) {
-		let startIndex = text.indexOf("可以"),
-			endIndex = text.indexOf("沒問題");
-		if (startIndex !== -1 && endIndex !== -1) {
-			let place = text.substring(startIndex, endIndex);
-			window.location.replace(
-				`https://www.google.com.tw/maps/place/${place}`
-			);
+	recognition.onresult = function (res) {
+		if (text.results[0][0].transcript !== undefined) {
+			text = text.results[0][0].transcript
+			let startIndex = text.indexOf("可以"),
+				endIndex = text.indexOf("沒問題");
+			if (startIndex !== -1 && endIndex !== -1) {
+				let place = text.substring(startIndex, endIndex);
+				window.location.replace(
+					`https://www.google.com.tw/maps/place/${place}`
+				);
+			}
 		}
-		
 	};
 
 	recognition.start();
