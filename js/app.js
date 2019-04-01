@@ -43,6 +43,7 @@ $(document).ready(function () {
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
 });
 function startDetect () {
+	created ()
 	recognition.continuous = true;
 	recognition.interimResults = true;
 	recognition.lang = "cmn-Hant-TW";
