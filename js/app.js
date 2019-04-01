@@ -153,11 +153,13 @@ function stopRecording () {
 
 						let Place = textResult.substring(startIndex, endIndex);
 						textResult = Place;
+						alert(textResult)
 						console.log(textResult)
 						// window.location.replace(
 						//   "https://www.google.com.tw/maps/place/"
 						// );
 					} else {
+						alert("nodata")
 						console.log("nodata");
 						// window.location.replace(
 						//   "https://www.google.com.tw/maps/place/"
