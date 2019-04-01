@@ -118,8 +118,8 @@ function created () {
 		rec = new Recorder(input, { numChannels: 1 })
 	}).catch(function (err) {
 		//enable the record button if getUserMedia() fails
-		recordButton.disabled = false;
-		stopButton.disabled = true;
+		// recordButton.disabled = false;
+		// stopButton.disabled = true;
 	});
 }
 
