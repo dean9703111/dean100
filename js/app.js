@@ -10,23 +10,23 @@ $(document).ready(function () {
 	} else {
 		recognition = new webkitSpeechRecognition();
 	}
-	startDetect()
-	// let sensor = new Magnetometer();
-	// let sensorValue = 0;
-	// sensor.start();
-	// sensor.onreading = () => {
-	// 	sensorValue = Math.round(Math.abs(sensor.x) + Math.abs(sensor.y) + Math.abs(sensor.z))
-	// 	if (sensorValue > 200 && recordStatus === 'stop') {
-	// 		recordStatus = 'start'
-	// 		console.log('開始錄音')
-	// 		startDetect()
-	// 	}
-	// 	if (sensorValue < 200 && recordStatus === 'start') {
-	// 		recordStatus = 'end'
-	// 		console.log('結束錄音')
-	// 	}
-	// };
-	// sensor.onerror = event => console.log(event.error.name, event.error.message);
+	// startDetect()
+	let sensor = new Magnetometer();
+	let sensorValue = 0;
+	sensor.start();
+	sensor.onreading = () => {
+		sensorValue = Math.round(Math.abs(sensor.x) + Math.abs(sensor.y) + Math.abs(sensor.z))
+		if (sensorValue > 200 && recordStatus === 'stop') {
+			recordStatus = 'start'
+			console.log('開始錄音')
+			startDetect()
+		}
+		if (sensorValue < 200 && recordStatus === 'start') {
+			recordStatus = 'end'
+			console.log('結束錄音')
+		}
+	};
+	sensor.onerror = event => console.log(event.error.name, event.error.message);
 });
 var show = document.getElementById('show');
 var finalPlace = document.getElementById('place');
