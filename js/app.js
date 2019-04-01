@@ -38,6 +38,12 @@ $(document).ready(function () {
 		if (sensorValue < 200 && recordStatus === 'start') {
 			recordStatus = 'end'
 			console.log('結束錄音')
+			recognition.onend = function () {
+				console.log('停止辨識!');
+				window.location.replace(
+					`https://www.google.com.tw/maps/place/台灣`
+				);
+			};
 		}
 	};
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
@@ -51,12 +57,7 @@ function startDetect () {
 	recognition.onstart = function () {
 		console.log('開始辨識...');
 	};
-	recognition.onend = function () {
-		console.log('停止辨識!');
-		window.location.replace(
-			`https://www.google.com.tw/maps/place/台灣`
-		);
-	};
+	
 
 	recognition.onresult = function (event) {
 		var i = event.resultIndex;
