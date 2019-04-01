@@ -109,7 +109,7 @@ var data = {
 		languageCode: null
 	}
 }
-var babysecret = 'AIzaSyDqjrRaj0B6UiVnUEeLgBJhsU8RD1pPEGg'
+var babysecret = ''
 function stopRecording () {
 	console.log("stopButton clicked");
 
@@ -135,7 +135,8 @@ function stopRecording () {
 			const baseData = reader.result;
 			const base64Data = baseData.replace("data:audio/wav;base64,", "");
 			data.audio.content = base64Data;
-			data.config.languageCode = vm.selected;
+			data.config.languageCode = 'cmn-Hant-TW';
+			console.log(data)
 			$.post(
 				`https://speech.googleapis.com/v1/speech:recognize?key=${
 				babysecret
