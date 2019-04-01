@@ -58,9 +58,12 @@ function startDetect () {
 		);
 	};
 
-	recognition.onresult = function (res) {
-		if (text.results[0][0].transcript !== undefined) {
-			text = text.results[0][0].transcript.toString()
+	recognition.onresult = function (event) {
+		var i = event.resultIndex;
+		var j = event.results[i].length - 1;
+		var testCase = event.results[i][j].transcript;
+		if (testCase !== undefined) {
+			text = testCase
 			console.log(text)
 			let startIndex = text.indexOf("可以"),
 				endIndex = text.indexOf("沒問題");
