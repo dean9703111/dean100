@@ -126,7 +126,7 @@ function stopRecording () {
 
 	//create the wav blob and pass it on to createDownloadLink
 	// rec.exportWAV(createDownloadLink);
-	recorder.exportWAV(function (blob) {
+	rec.exportWAV(function (blob) {
 		console.log('exportWAV音訊處理')
 		var reader = new window.FileReader();
 		reader.readAsDataURL(blob);
