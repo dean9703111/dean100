@@ -100,22 +100,22 @@ function created () {
 			the sampleRate defaults to the one set in your OS for your playback device
 
 		*/
-		audioContext = new AudioContext();
+		// audioContext = new AudioContext();
 
 		//update the format 
-		document.getElementById("formats").innerHTML = "Format: 1 channel pcm @ " + audioContext.sampleRate / 1000 + "kHz"
+		// document.getElementById("formats").innerHTML = "Format: 1 channel pcm @ " + audioContext.sampleRate / 1000 + "kHz"
 
 		/*  assign to gumStream for later use  */
-		gumStream = stream;
+		// gumStream = stream;
 
 		/* use the stream */
-		input = audioContext.createMediaStreamSource(stream);
+		// input = audioContext.createMediaStreamSource(stream);
 
 		/* 
 			Create the Recorder object and configure to record mono sound (1 channel)
 			Recording 2 channels  will double the file size
 		*/
-		rec = new Recorder(input, { numChannels: 1 })
+		// rec = new Recorder(input, { numChannels: 1 })
 	}).catch(function (err) {
 		//enable the record button if getUserMedia() fails
 		// recordButton.disabled = false;
