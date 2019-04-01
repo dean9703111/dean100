@@ -11,15 +11,20 @@ var audioContext //audio context to help us record
 
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
-
+var recognition;
 //add events to those 2 buttons
 recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
 var recordStatus = 'stop'
 $(document).ready(function () {
 	// 先詢問音訊
-	created()
+	// created()
 	// 偵測磁場
+	if (!('webkitSpeechRecognition' in window)) {
+		upgrade();
+	} else {
+		recognition = new webkitSpeechRecognition();
+	}
 	let sensor = new Magnetometer();
 	let sensorValue = 0;
 	sensor.start();
@@ -28,17 +33,41 @@ $(document).ready(function () {
 		if (sensorValue > 200 && recordStatus === 'stop') {
 			recordStatus = 'start'
 			console.log('開始錄音')
-			startRecording()
+			startDetect()
 		}
 		if (sensorValue < 200 && recordStatus === 'start') {
 			recordStatus = 'end'
 			console.log('結束錄音')
-			stopRecording()
 		}
 	};
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
 });
+function startDetect () {
+	recognition.continuous = true;
+	recognition.interimResults = true;
+	recognition.lang = "cmn-Hant-TW";
 
+	recognition.onstart = function () {
+		console.log('開始辨識...');
+	};
+	recognition.onend = function () {
+		console.log('停止辨識!');
+	};
+
+	recognition.onresult = function (text) {
+		let startIndex = text.indexOf("可以"),
+			endIndex = text.indexOf("沒問題");
+		if (startIndex !== -1 && endIndex !== -1) {
+			let place = text.substring(startIndex, endIndex);
+			window.location.replace(
+				`https://www.google.com.tw/maps/place/${place}`
+			);
+		}
+		
+	};
+
+	recognition.start();
+}
 
 function created () {
 	/*
