@@ -75,7 +75,9 @@ function startDetect () {
 		}
 	};
 	recognition.onend = function () {
-		console.log('停止辨識!');
+		console.log('重開辨識!');
+		recognition.start();
+
 		// window.location.replace(
 		// 	`https://www.google.com.tw/maps/place/台灣`
 		// );
