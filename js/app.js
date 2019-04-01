@@ -38,16 +38,12 @@ $(document).ready(function () {
 		if (sensorValue < 200 && recordStatus === 'start') {
 			recordStatus = 'end'
 			console.log('結束錄音')
-			recognition.onend = function () {
-				console.log('停止辨識!');
-				window.location.replace(
-					`https://www.google.com.tw/maps/place/台灣`
-				);
-			};
 		}
 	};
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
 });
+var show = document.getElementById('show');
+var finalPlace = document.getElementById('place');
 function startDetect () {
 	created()
 	recognition.continuous = true;
@@ -57,26 +53,37 @@ function startDetect () {
 	recognition.onstart = function () {
 		console.log('開始辨識...');
 	};
-	
+
 
 	recognition.onresult = function (event) {
 		var i = event.resultIndex;
 		var j = event.results[i].length - 1;
 		var testCase = event.results[i][j].transcript;
+		show.innerHTML = testCase
 		if (testCase !== undefined) {
+			
+			var i = event.resultIndex;
+			var j = event.results[i].length - 1;
+			show.innerHTML = event.results[i][j].transcript;
 			text = testCase
 			console.log(text)
 			let startIndex = text.indexOf("可以"),
 				endIndex = text.indexOf("沒問題");
 			if (startIndex !== -1 && endIndex !== -1) {
 				let place = text.substring(startIndex, endIndex);
+				finalPlace = place
 				window.location.replace(
 					`https://www.google.com.tw/maps/place/${place}`
 				);
 			}
 		}
 	};
-
+	recognition.onend = function () {
+		console.log('停止辨識!');
+		window.location.replace(
+			`https://www.google.com.tw/maps/place/台灣`
+		);
+	};
 	recognition.start();
 }
 
