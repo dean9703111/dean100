@@ -43,6 +43,7 @@ function startDetect() {
 	recognition.onstart = function () {
 		console.log('開始辨識...');
 		if ($('.vibrate').is(':checked')) {
+			console.log('震動')
 			window.navigator.vibrate(150); 
 		}
 	};
