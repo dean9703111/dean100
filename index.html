@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Simple Recorder.js demo with record, stop and pause</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
-  <body>
-      <h1 id="show"></h1>
-      <h1 id="place"></h1>
-    <!-- <div id="controls">
-  	 <button id="recordButton">Record</button>
-  	 <button id="stopButton" disabled>Stop</button>
-    </div>
-    <div id="formats">Format: start recording to see sample rate</div>
-  	<h3>Recordings</h3>
-  	<ol id="recordingsList"></ol> -->
 
-    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
-    <script src="js/jquery.js"></script>
-  	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
-  	<script src="js/app.js"></script>
-    
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Recorder.js demo with record, stop and pause</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <input type="text" value="chrome://flags/#enable-generic-sensor-extra-classes" id="chromeFlag" readonly="readonly" >
+
+  <div class="tooltip">
+    <button onclick="copyFlag()">
+      <span class="tooltiptext" id="myTooltip">Copy Flag</span>
+      Copy Flag
+    </button>
+  </div>
+  <h1 id="show"></h1>
+  <h1 id="place"></h1>
+  <div>
+    map:
+    <label>
+      <input type="radio" name="mapSelect" value="search" checked>
+      自己國家景點
+    </label>
+    <label>
+      <input type="radio" name="mapSelect" value="place">
+      世界位置
+    </label>
+  </div>
+  <script src="js/jquery.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+
 </html>
