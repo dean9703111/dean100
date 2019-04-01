@@ -80,9 +80,9 @@ function startDetect () {
 	};
 	recognition.onend = function () {
 		console.log('停止辨識!');
-		window.location.replace(
-			`https://www.google.com.tw/maps/place/台灣`
-		);
+		// window.location.replace(
+		// 	`https://www.google.com.tw/maps/place/台灣`
+		// );
 	};
 	recognition.start();
 }
