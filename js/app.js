@@ -18,7 +18,7 @@ stopButton.addEventListener("click", stopRecording);
 var recordStatus = 'stop'
 $(document).ready(function () {
 	// 先詢問音訊
-	created ()
+	created()
 	// 偵測磁場
 	let sensor = new Magnetometer();
 	let sensorValue = 0;
@@ -52,12 +52,12 @@ function created () {
 	  Disable the record button until we get a success or fail from getUserMedia() 
   */
 
-	
+
 	/*
     	We're using the standard promise based getUserMedia() 
     	https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
 	*/
-	if(navigator.getUserMedia){}
+	if (navigator.getUserMedia) { }
 	navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
 		console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 
@@ -99,8 +99,17 @@ function startRecording () {
 
 	console.log("Recording started");
 }
-
-
+var data = {
+	audio: {
+		content: null
+	},
+	config: {
+		encoding: "LINEAR16",
+		sampleRateHertz: 44100,
+		languageCode: null
+	}
+}
+var babysecret = 'AIzaSyDqjrRaj0B6UiVnUEeLgBJhsU8RD1pPEGg'
 function stopRecording () {
 	console.log("stopButton clicked");
 
@@ -116,7 +125,50 @@ function stopRecording () {
 	gumStream.getAudioTracks()[0].stop();
 
 	//create the wav blob and pass it on to createDownloadLink
-	rec.exportWAV(createDownloadLink);
+	// rec.exportWAV(createDownloadLink);
+	recorder.exportWAV(function (blob) {
+		console.log('exportWAV音訊處理')
+		var reader = new window.FileReader();
+		reader.readAsDataURL(blob);
+		reader.onloadend = () => {
+			console.log('音訊處理')
+			const baseData = reader.result;
+			const base64Data = baseData.replace("data:audio/wav;base64,", "");
+			data.audio.content = base64Data;
+			data.config.languageCode = vm.selected;
+			$.post(
+				`https://speech.googleapis.com/v1/speech:recognize?key=${
+				babysecret
+				}`,
+				data
+			)
+				.then(response => {
+					console.log(response)
+					if (!_isEmpty(response.data)) {
+						const result = response.data.results[0].alternatives[0];
+						let textResult = result.transcript;
+
+						let startIndex = textResult.indexOf("可以"),
+							endIndex = textResult.indexOf("沒問題");
+
+						let Place = textResult.substring(startIndex, endIndex);
+						textResult = Place;
+						console.log(textResult)
+						// window.location.replace(
+						//   "https://www.google.com.tw/maps/place/"
+						// );
+					} else {
+						console.log("nodata");
+						// window.location.replace(
+						//   "https://www.google.com.tw/maps/place/"
+						// );
+					}
+				})
+				.catch(error => {
+					console.log("ERROR:" + error);
+				});
+		};
+	});
 }
 
 function createDownloadLink (blob) {
