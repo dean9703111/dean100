@@ -45,6 +45,7 @@ function startDetect() {
 		if ($('input.vibrate').is(':checked')) {
 			console.log('震動')
 			window.navigator.vibrate(150); 
+			window.navigator.vibrate(0)
 		}
 	};
 
