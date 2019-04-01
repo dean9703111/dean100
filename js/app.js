@@ -13,8 +13,8 @@ var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var recognition;
 //add events to those 2 buttons
-recordButton.addEventListener("click", startRecording);
-stopButton.addEventListener("click", stopRecording);
+// recordButton.addEventListener("click", startRecording);
+// stopButton.addEventListener("click", stopRecording);
 var recordStatus = 'stop'
 $(document).ready(function () {
 	// 先詢問音訊
