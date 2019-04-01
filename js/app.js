@@ -66,7 +66,7 @@ function startDetect () {
 			let startIndex = text.indexOf("可以"),
 				endIndex = text.indexOf("沒問題");
 			if (startIndex !== -1 && endIndex !== -1) {
-				let place = text.substring(startIndex, endIndex);
+				let place = text.substring(startIndex+2, endIndex);
 				finalPlace = place
 				window.location.replace(
 					`https://www.google.com.tw/maps/place/${place}`
