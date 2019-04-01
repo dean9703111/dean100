@@ -35,6 +35,7 @@ $(document).ready(function () {
 var show = document.getElementById('show');
 var finalPlace = document.getElementById('place');
 function startDetect() {
+	console.log('startDetect')
 	recognition.continuous = true;
 	recognition.interimResults = true;
 	recognition.lang = "cmn-Hant-TW";
