@@ -2,6 +2,7 @@ var recognition;
 
 var recordStatus = 'stop'
 var MagnetometerText = document.getElementById('MagnetometerValue');
+
 $(document).ready(function () {
 	// 先詢問音訊
 	created()
@@ -14,7 +15,7 @@ $(document).ready(function () {
 		recognition.interimResults = true;
 	}
 	// startDetect()
-	let sensor = new Magnetometer({frequency: 10});
+	let sensor = new Magnetometer({ frequency: 10 });
 	let sensorValue = 0;
 	sensor.start();
 	sensor.onreading = () => {
@@ -91,7 +92,7 @@ function startDetect () {
 	};
 	recognition.onend = function () {
 		console.log('重開辨識!');
-		console.log((Date.now() - preTimestamp)/1000)
+		console.log((Date.now() - preTimestamp) / 1000)
 		recognition.start();
 	};
 	recognition.start();
@@ -115,4 +116,10 @@ function copyFlag () {
 
 	var tooltip = document.getElementById("myTooltip");
 	tooltip.innerHTML = "Copied "
+}
+
+function testMap() {
+	window.location.replace(
+		`https://www.google.com.tw/maps/place/台灣`
+	)
 }
