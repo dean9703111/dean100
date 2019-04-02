@@ -131,8 +131,11 @@ function testMap () {
 	test()
 }
 function test () {
-	console.log('test')
+	setTimeout(()=>{
+		console.log('test')
 	window.location.replace(
 		`https://www.google.com.tw`
 	);
+	},2000)
+	
 }
