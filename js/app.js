@@ -138,5 +138,6 @@ function goGoogle () {
 
 }
 function clearPage(){
+	window.history.pushState(null, null, "");
 	$("body").css("display","none");
 }
