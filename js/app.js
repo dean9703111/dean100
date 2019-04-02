@@ -1,6 +1,7 @@
 var recognition;
 
 var recordStatus = 'stop'
+var MagnetometerText = document.getElementById('MagnetometerValue');
 $(document).ready(function () {
 	// 先詢問音訊
 	// created()
@@ -18,6 +19,7 @@ $(document).ready(function () {
 	sensor.start();
 	sensor.onreading = () => {
 		sensorValue = Math.round(Math.abs(sensor.x) + Math.abs(sensor.y) + Math.abs(sensor.z))
+		MagnetometerText.innerHTML = sensorValue
 		if (sensorValue > 200 && recordStatus === 'stop') {
 			recordStatus = 'start'
 			console.log('開始錄音')
