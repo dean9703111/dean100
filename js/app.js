@@ -4,7 +4,7 @@ var recordStatus = 'stop'
 var MagnetometerText = document.getElementById('MagnetometerValue');
 $(document).ready(function () {
 	// 先詢問音訊
-	// created()
+	created()
 	// 偵測磁場
 	if (!('webkitSpeechRecognition' in window)) {
 		upgrade();
