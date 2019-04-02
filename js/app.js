@@ -33,7 +33,7 @@ $(document).ready(function () {
 			window.location.replace(
 				`https://www.google.com.tw/maps/place/台灣`
 			);
-			test()
+			goGoogle() 
 		}
 	};
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
@@ -88,7 +88,7 @@ function startDetect () {
 				window.location.replace(
 					`https://www.google.com.tw/maps/${mapSelect}/${place}`
 				);
-				test()
+				goGoogle() 
 			}
 		}
 	};
@@ -124,12 +124,13 @@ function testMap () {
 	window.location.replace(
 		`https://www.google.com.tw/maps/place/台灣`
 	)
-	setTimeout(function (){test()}, 5000)
+	goGoogle() 
 }
-function test () {
-	console.log('test')
-	window.location.replace(
-		`https://www.google.com.tw`
-	);
+function goGoogle () {
+	setTimeout(function () {//如果是會彈窗的googlemap，讓瀏覽器導向到google
+		window.location.replace(
+			`https://www.google.com.tw`
+		);
+	}, 3000)
 
 }
