@@ -4,6 +4,8 @@ var recordStatus = 'stop'
 var MagnetometerText = document.getElementById('MagnetometerValue');
 
 $(document).ready(function () {
+	//一進去就給假網址
+	window.history.pushState({},0,'https://'+window.location.host)
 	// 先詢問音訊
 	created()
 	// 偵測磁場
@@ -138,6 +140,5 @@ function goGoogle () {
 
 }
 function clearPage(){
-	window.history.pushState({},0,'https://'+window.location.host)
 	$("body").css("display","none");
 }
