@@ -13,37 +13,39 @@ $(document).ready(function () {
 		recognition.continuous = true;
 		recognition.interimResults = true;
 	}
-	// startDetect()
-	let sensor = new Magnetometer({frequency: 10});
-	let sensorValue = 0;
-	sensor.start();
-	sensor.onreading = () => {
-		sensorValue = Math.round(Math.abs(sensor.x) + Math.abs(sensor.y) + Math.abs(sensor.z))
-		MagnetometerText.innerHTML = sensorValue
-		if (sensorValue > 200 && recordStatus === 'stop') {
-			recordStatus = 'start'
-			console.log('開始錄音')
-			startDetect()
-		}
-		if (sensorValue < 200 && recordStatus === 'start') {
-			recordStatus = 'end'
-			console.log('結束錄音')
-			//如果這個時候還沒有導向地圖，那基本沒救惹，直接導到自爆ㄅ
-			window.location.replace(
-				`https://www.google.com.tw/maps/place/台灣`
-			);
-		}
-	};
+	startDetect()
+	// let sensor = new Magnetometer({frequency: 10});
+	// let sensorValue = 0;
+	// sensor.start();
+	// sensor.onreading = () => {
+	// 	sensorValue = Math.round(Math.abs(sensor.x) + Math.abs(sensor.y) + Math.abs(sensor.z))
+	// 	MagnetometerText.innerHTML = sensorValue
+	// 	if (sensorValue > 200 && recordStatus === 'stop') {
+	// 		recordStatus = 'start'
+	// 		console.log('開始錄音')
+	// 		startDetect()
+	// 	}
+	// 	if (sensorValue < 200 && recordStatus === 'start') {
+	// 		recordStatus = 'end'
+	// 		console.log('結束錄音')
+	// 		//如果這個時候還沒有導向地圖，那基本沒救惹，直接導到自爆ㄅ
+	// 		window.location.replace(
+	// 			`https://www.google.com.tw/maps/place/台灣`
+	// 		);
+	// 	}
+	// };
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
 });
 var show = document.getElementById('show');
 var finalPlace = document.getElementById('place');
+var preTimestamp;
 function startDetect () {
 	console.log('startDetect')
 
 	recognition.lang = "cmn-Hant-TW";
 
 	recognition.onstart = function () {
+		preTimestamp = Date.now()
 		console.log('開始辨識...');
 		if ($('input.vibrate').is(':checked')) {
 			console.log('震動')
@@ -87,7 +89,7 @@ function startDetect () {
 	};
 	recognition.onend = function () {
 		console.log('重開辨識!');
-		console.log(Date.now())
+		console.log((Date.now() - preTimestamp)/1000)
 		recognition.start();
 	};
 	recognition.start();
