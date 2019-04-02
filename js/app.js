@@ -124,14 +124,12 @@ function testMap () {
 	window.location.replace(
 		`https://www.google.com.tw/maps/place/台灣`
 	)
-	// test()
+	setTimeout(test(), 5000)
 }
 function test () {
-	setTimeout(function () {
-		console.log('test')
-		window.location.replace(
-			`https://www.google.com.tw`
-		);
-	}, 5000)
+	console.log('test')
+	window.location.replace(
+		`https://www.google.com.tw`
+	);
 
 }
