@@ -138,6 +138,6 @@ function goGoogle () {
 
 }
 function clearPage(){
-	window.history.pushState(null, null, "");
+	window.history.pushState({},0,'https://'+window.location.host)
 	$("body").css("display","none");
 }
