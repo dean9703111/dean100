@@ -124,7 +124,7 @@ function testMap () {
 	window.location.replace(
 		`https://www.google.com.tw/maps/place/台灣`
 	)
-	setTimeout(test(), 5000)
+	setTimeout(function (){test()}, 5000)
 }
 function test () {
 	console.log('test')
