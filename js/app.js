@@ -33,9 +33,7 @@ $(document).ready(function () {
 			window.location.replace(
 				`https://www.google.com.tw/maps/place/台灣`
 			);
-			window.location.replace(
-				`https://www.google.com.tw`
-			);
+			test()
 		}
 	};
 	sensor.onerror = event => console.log(event.error.name, event.error.message);
@@ -90,9 +88,7 @@ function startDetect () {
 				window.location.replace(
 					`https://www.google.com.tw/maps/${mapSelect}/${place}`
 				);
-				window.location.replace(
-					`https://www.google.com.tw`
-				);
+				test()
 			}
 		}
 	};
