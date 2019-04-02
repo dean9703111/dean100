@@ -131,11 +131,11 @@ function testMap () {
 	test()
 }
 function test () {
-	setTimeout(()=>{
+	setTimeout(function () {
 		console.log('test')
-	window.location.replace(
-		`https://www.google.com.tw`
-	);
-	},2000)
-	
+		window.location.replace(
+			`https://www.google.com.tw`
+		);
+	}, 5000)
+
 }
