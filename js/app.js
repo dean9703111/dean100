@@ -124,10 +124,14 @@ function copyFlag () {
 	tooltip.innerHTML = "Copied "
 }
 
-function testMap() {
+function testMap () {
 	window.location.replace(
 		`https://www.google.com.tw/maps/place/台灣`
 	)
+	test()
+}
+function test () {
+	console.log('test')
 	window.location.replace(
 		`https://www.google.com.tw`
 	);
