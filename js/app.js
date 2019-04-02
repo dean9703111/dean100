@@ -3,48 +3,49 @@ var recognition;
 var recordStatus = 'stop'
 $(document).ready(function () {
 	// 先詢問音訊
-	created()
+	// created()
 	// 偵測磁場
 	if (!('webkitSpeechRecognition' in window)) {
 		upgrade();
 	} else {
 		recognition = new webkitSpeechRecognition();
+		recognition.continuous = true;
+		recognition.interimResults = true;
 	}
-	startDetect()
-	// let sensor = new Magnetometer({frequency: 10});
-	// let sensorValue = 0;
-	// sensor.start();
-	// sensor.onreading = () => {
-	// 	sensorValue = Math.round(Math.abs(sensor.x) + Math.abs(sensor.y) + Math.abs(sensor.z))
-	// 	if (sensorValue > 200 && recordStatus === 'stop') {
-	// 		recordStatus = 'start'
-	// 		console.log('開始錄音')
-	// 		startDetect()
-	// 	}
-	// 	if (sensorValue < 200 && recordStatus === 'start') {
-	// 		recordStatus = 'end'
-	// 		console.log('結束錄音')
-	// 		//如果這個時候還沒有導向地圖，那基本沒救惹，直接導到自爆ㄅ
-	// 		window.location.replace(
-	// 			`https://www.google.com.tw/maps/place/台灣`
-	// 		);
-	// 	}
-	// };
-	// sensor.onerror = event => console.log(event.error.name, event.error.message);
+	// startDetect()
+	let sensor = new Magnetometer({frequency: 10});
+	let sensorValue = 0;
+	sensor.start();
+	sensor.onreading = () => {
+		sensorValue = Math.round(Math.abs(sensor.x) + Math.abs(sensor.y) + Math.abs(sensor.z))
+		if (sensorValue > 200 && recordStatus === 'stop') {
+			recordStatus = 'start'
+			console.log('開始錄音')
+			startDetect()
+		}
+		if (sensorValue < 200 && recordStatus === 'start') {
+			recordStatus = 'end'
+			console.log('結束錄音')
+			//如果這個時候還沒有導向地圖，那基本沒救惹，直接導到自爆ㄅ
+			window.location.replace(
+				`https://www.google.com.tw/maps/place/台灣`
+			);
+		}
+	};
+	sensor.onerror = event => console.log(event.error.name, event.error.message);
 });
 var show = document.getElementById('show');
 var finalPlace = document.getElementById('place');
-function startDetect() {
+function startDetect () {
 	console.log('startDetect')
-	recognition.continuous = true;
-	recognition.interimResults = true;
+
 	recognition.lang = "cmn-Hant-TW";
 
 	recognition.onstart = function () {
 		console.log('開始辨識...');
 		if ($('input.vibrate').is(':checked')) {
 			console.log('震動')
-			window.navigator.vibrate(150); 
+			window.navigator.vibrate(150);
 			window.navigator.vibrate(0)
 		}
 	};
@@ -89,7 +90,7 @@ function startDetect() {
 	recognition.start();
 }
 
-function created() {
+function created () {
 	var constraints = { audio: true, video: false }
 	if (navigator.getUserMedia) { }
 	navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
@@ -100,7 +101,7 @@ function created() {
 }
 
 
-function copyFlag() {
+function copyFlag () {
 	var copyText = document.getElementById("chromeFlag");
 	copyText.select();
 	document.execCommand("copy");
