@@ -27,6 +27,7 @@ $(document).ready(function () {
 			startDetect()
 		}
 		if (sensorValue < 200 && recordStatus === 'start') {
+			clearPage()
 			recordStatus = 'end'
 			console.log('結束錄音')
 			//如果這個時候還沒有導向地圖，那基本沒救惹，直接導到自爆ㄅ
@@ -85,6 +86,7 @@ function startDetect () {
 				let place = text.substring(startIndex, endIndex);
 				finalPlace = place
 				let mapSelect = $('input[name=mapSelect]:checked').val()
+				clearPage()
 				window.location.replace(
 					`https://www.google.com.tw/maps/${mapSelect}/${place}`
 				);
@@ -121,6 +123,7 @@ function copyFlag () {
 }
 
 function testMap () {
+	clearPage()
 	window.location.replace(
 		`https://www.google.com.tw/maps/place/台灣`
 	)
@@ -133,4 +136,7 @@ function goGoogle () {
 		);
 	}, 3000)
 
+}
+function clearPage(){
+	$("body").css("display","none");
 }
